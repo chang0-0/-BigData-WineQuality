@@ -65,11 +65,6 @@ g = sns.pairplot(wine_sample, kind='reg', plot_kws={"ci": False, "x_jitter":0.25
 		markers=["o", "s"], vars=['quality', 'alcohol', 'residual_sugar'])
 
 
-
-
-
-
-
 print(g)
 plt.suptitle('Histograms and Scatter Plots of Quality, Alcohol, and Residual Sugar', fontsize=14, horizontalalignment='center', verticalalignment='top', x=0.5, y=0.999)
 plt.show()
@@ -118,11 +113,3 @@ new_observations = wine.loc[wine.index.isin(range(10)), independent_variables.co
 y_predicted = lm.predict(new_observations)
 y_predicted_rounded = [round(score, 2) for score in y_predicted]
 print(y_predicted_rounded)
-
-
-
-
-
-
-
-
