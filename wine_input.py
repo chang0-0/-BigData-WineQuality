@@ -16,16 +16,16 @@ print(wine.info())
 # Display descriptive statistics for all variables
 print(wine.describe())
 
-# Identify unique values
+# Identify unique values (유일 값)
 print(sorted(wine.quality.unique()))
 
 # Calculate value frequencies
 print(wine.quality.value_counts())
 
 # Display descriptive statistics for quality by wine type
-print(wine.groupby('type')[['quality']].describe().unstack('type'))
+print(wine.groupby('type')[['alcohol']].describe().unstack('type'))
 
-# Calculate specific qualities
+# Calculate specific qualities (특정 사분 위수 계산)
 print(wine.groupby('type')[['quality']].quantile([0.25, 0.75]).unstack('type'))
 
 # Calculate correlation matrix for all variables
@@ -69,8 +69,6 @@ print(g)
 plt.suptitle('Histograms and Scatter Plots of Quality, Alcohol, and Residual Sugar', fontsize=14, horizontalalignment='center', verticalalignment='top', x=0.5, y=0.999)
 plt.show()
 
-
-
 # Look at the distribution of quality by wine type
 red_wine = wine.loc[wine['type']=='red', 'quality']
 white_wine = wine.loc[wine['type']=='white', 'quality']
@@ -92,7 +90,6 @@ my_formula = 'quality ~ alcohol + chlorides + citric_acid + density + fixed_acid
 
 lm = ols(my_formula, data=wine).fit()
 # 또는 lm = glm(my_formula, data=wine, family=sm.families.Gaussian()).fit()
-
 print(lm.summary())
 print("\nQuantities you can extract from the result:\n%s" %dir(lm))
 print("\nCoefficients:\n%s" % lm.params)
@@ -102,14 +99,18 @@ print("\nF-statistic: %.1f P-value: %.2f" % (lm.fvalue, lm.f_pvalue))
 print("\nNumber of obs: %d Number of fitted values: %s" % (lm.nobs, len(lm.fittedvalues)))
 
 #와인 데이터셋의 quality를 종속변수로 생성
+print("======================================== 독립변수 표준화를 진행한뒤 출력===================================================")
 dependent_variable = wine['quality']
-
-independent_variables = wine[wine.columns.difference(['queality', 'type', 'in_sameple'])]
+independent_variables = wine[wine.columns.difference(['quality', 'type', 'in_sample'])]
 independent_variables_standardized = (independent_variables - independent_variables.mean()) / independent_variables.std()
 wine_standardized = pd.concat([dependent_variable, independent_variables_standardized], axis=1)
+lm_standardized = ols(my_formula, data=wine_standardized).fit()
+print(lm_standardized.summary())
 
-#기존 데이터셋의 처음 10개의 값을 가지고 '새로운' 관측값 데이터셋을 만듦
+
+#기존 데이터셋의 처음 10개의 값을 가지고 '새로운' 관측값 데이터셋을 만듬
 new_observations = wine.loc[wine.index.isin(range(10)), independent_variables.columns]
 y_predicted = lm.predict(new_observations)
 y_predicted_rounded = [round(score, 2) for score in y_predicted]
+
 print(y_predicted_rounded)
