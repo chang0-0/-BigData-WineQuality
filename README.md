@@ -2,11 +2,10 @@
 
 
 
-<b> 회귀계수(Coefficients) </b>
+<p> 회귀계수(Coefficients) </p>
 
             
-
-Coefficients:
+<p>Coefficients:</p>
             Estimate                     P(>|t|)    
 (Intercept) -17.5791                       0.012    
 speed         3.9324                       0.000
