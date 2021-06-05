@@ -6,9 +6,9 @@
 
             
 <p>Coefficients:</p>
-<p> &bnsp;&bnsp;&bnsp;           Estimate           &bnsp;&bnsp;&bnsp;&bnsp;          P(>|t|) </p>            
-(Intercept) -17.5791                       0.012    
-speed         3.9324                       0.000
+<p>          Estimate                 P(>|t|) </p>            
+<p> (Intercept) -17.5791                       0.012   </p>  
+<p> speed         3.9324                       0.000</p> 
 
 
 <span> Coef는 데이터로부터 얻은 계수의 추정치를 말한다. </span>
