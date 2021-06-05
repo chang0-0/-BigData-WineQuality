@@ -6,7 +6,7 @@
 
 ---
 <p>Coefficients:</p>
-<p>　　　　　　　     Estimate   　　　　　          P(>|t|)  </p>            
+<p>　　　　　　　  Estimate   　　　　　          P(>|t|)  </p>            
 <p> (Intercept) -17.5791        　　　　               0.012   </p>  
 <p> speed        3.9324      　　　　                  0.000   </p> 
 
