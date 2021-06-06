@@ -105,6 +105,8 @@ independent_variables = wine[wine.columns.difference(['quality', 'type', 'in_sam
 independent_variables_standardized = (independent_variables - independent_variables.mean()) / independent_variables.std()
 wine_standardized = pd.concat([dependent_variable, independent_variables_standardized], axis=1)
 lm_standardized = ols(my_formula, data=wine_standardized).fit()
+
+print(wine_standardized.describe())
 print(lm_standardized.summary())
 
 
