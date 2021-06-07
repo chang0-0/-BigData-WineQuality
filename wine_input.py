@@ -31,6 +31,7 @@ print(wine.groupby('type')[['quality']].quantile([0.25, 0.75]).unstack('type'))
 # Calculate correlation matrix for all variables
 print(wine.corr())
 
+# 변수간 관계 살펴보기(산점도 작성)
 # Look at relationship between pairs of variables
 # Take a "small" sample of red and white wines for plotting
 def take_sample(data_frame, replace=False, n=200):
@@ -98,17 +99,39 @@ print("\nAdj. R-squared:\n%.ef" % lm.rsquared_adj)
 print("\nF-statistic: %.1f P-value: %.2f" % (lm.fvalue, lm.f_pvalue))
 print("\nNumber of obs: %d Number of fitted values: %s" % (lm.nobs, len(lm.fittedvalues)))
 
+
 #와인 데이터셋의 quality를 종속변수로 생성
 print("======================================== 독립변수 표준화를 진행한뒤 출력===================================================")
 dependent_variable = wine['quality']
 independent_variables = wine[wine.columns.difference(['quality', 'type', 'in_sample'])]
+
+
+
+# print(" 표준화 값 비교")
+# from sklearn.preprocessing import StandardScaler
+# scaler = StandardScaler()
+
+# scaler.fit(independent_variables)
+
+# independent_variables = scaler.transform(independent_variables)
+
+# wine_standardized = scaler.transform(independent_variables)
+
+# print(wine_standardized)
+
+# logit_model = sm.OLS(dependent_variable, wine_standardized).fit()
+
+
+
 independent_variables_standardized = (independent_variables - independent_variables.mean()) / independent_variables.std()
 wine_standardized = pd.concat([dependent_variable, independent_variables_standardized], axis=1)
 lm_standardized = ols(my_formula, data=wine_standardized).fit()
 
-print(wine_standardized.describe())
-print(lm_standardized.summary())
+print("테스트")
+print(lm_standardized)
+print(wine_standardized)
 
+print(lm_standardized.summary())
 
 #기존 데이터셋의 처음 10개의 값을 가지고 '새로운' 관측값 데이터셋을 만듬
 new_observations = wine.loc[wine.index.isin(range(10)), independent_variables.columns]
