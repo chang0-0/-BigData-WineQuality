@@ -29,6 +29,8 @@ print(wine.groupby('type')[['alcohol']].describe().unstack('type'))
 print(wine.groupby('type')[['quality']].quantile([0.25, 0.75]).unstack('type'))
 
 # Calculate correlation matrix for all variables
+print("================================================wine corr=====================================================")
+
 print(wine.corr())
 
 # 변수간 관계 살펴보기(산점도 작성)
@@ -104,8 +106,7 @@ print("\nNumber of obs: %d Number of fitted values: %s" % (lm.nobs, len(lm.fitte
 print("======================================== 독립변수 표준화를 진행한뒤 출력===================================================")
 dependent_variable = wine['quality']
 independent_variables = wine[wine.columns.difference(['quality', 'type', 'in_sample'])]
-
-
+# quality와 type과 in_sample을 제외하고 모든컬럼을 넣는다는 의미 
 
 # print(" 표준화 값 비교")
 # from sklearn.preprocessing import StandardScaler
@@ -120,8 +121,6 @@ independent_variables = wine[wine.columns.difference(['quality', 'type', 'in_sam
 # print(wine_standardized)
 
 # logit_model = sm.OLS(dependent_variable, wine_standardized).fit()
-
-
 
 independent_variables_standardized = (independent_variables - independent_variables.mean()) / independent_variables.std()
 wine_standardized = pd.concat([dependent_variable, independent_variables_standardized], axis=1)
