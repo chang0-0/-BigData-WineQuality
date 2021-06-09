@@ -33,3 +33,32 @@ dist = − 17.5791 + 3.9324 × speed
 E(Y) = f(x) = beta0 + beta1X1
 
 </span>
+
+코드 해석 의문점 선형회귀분석.
+
+선형회귀분석 결과값 출력하는 summary 부분에서. 표준화값이랑 표준화하지 않은 갑을 추가해서 결과를 비교하는데.
+my_formula 를 똑같이 사용하는데
+이거 data=wine 부분 in_sample이랑 qaulity type 다 들어가있음 why?
+근데 아랫부분 표준화 파트 보면 in_sample, quality, type 다 날리고 전체 표준화 작업들어감
+그러고 나서 다시 선형 회귀분석 결과값 출력대는
+data=wine_standardized 값으로 함.
+그러면 위의 출력값이 같을수가 있나????? 이해를 할수가 없네
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
