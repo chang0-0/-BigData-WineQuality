@@ -91,7 +91,18 @@ print('tstat: %.3f pvalue: %.4f' % (tstat, pvalue))
 
 my_formula = 'quality ~ alcohol + chlorides + citric_acid + density + fixed_acidity + free_sulfur_dioxide + pH + residual_sugar + sulphates + total_sulfur_dioxide + volatile_acidity'
 
-lm = ols(my_formula, data=wine).fit()
+
+print("선형회귀 모델 학습 출력 값")
+lm = ols(formula = my_formula, data=wine).fit()
+'''
+이거 data=wine 부분 in_sample이랑 qaulity type 다 들어가있음 why?
+근데 아랫부분 표준화 파트 보면 in_sample, quality, type 다 날리고 전체 표준화 작업들어감
+그러고 나서 다시 선형 회귀분석 결과값 출력대는
+data=wine_standardized 값으로 함.
+그러면 위의 출력값이 같을수가 있나?????
+'''
+
+
 # 또는 lm = glm(my_formula, data=wine, family=sm.families.Gaussian()).fit()
 print(lm.summary())
 print("\nQuantities you can extract from the result:\n%s" %dir(lm))
@@ -106,6 +117,8 @@ print("\nNumber of obs: %d Number of fitted values: %s" % (lm.nobs, len(lm.fitte
 print("======================================== 독립변수 표준화를 진행한뒤 출력===================================================")
 dependent_variable = wine['quality']
 independent_variables = wine[wine.columns.difference(['quality', 'type', 'in_sample'])]
+print(wine.columns)
+
 # quality와 type과 in_sample을 제외하고 모든컬럼을 넣는다는 의미 
 
 # print(" 표준화 값 비교")
@@ -124,6 +137,16 @@ independent_variables = wine[wine.columns.difference(['quality', 'type', 'in_sam
 
 independent_variables_standardized = (independent_variables - independent_variables.mean()) / independent_variables.std()
 wine_standardized = pd.concat([dependent_variable, independent_variables_standardized], axis=1)
+print("axis 테스트 \n")
+print("종속 변수 출력\n" ,dependent_variable)
+print("표준화 된 독립변수 출력\n", independent_variables_standardized)
+print("전체 표준화 axis 값 출력\n", wine_standardized)
+
+print("선형 회귀 분석 변수값 테스트")
+print(wine.info())
+print(wine_standardized)
+
+
 lm_standardized = ols(my_formula, data=wine_standardized).fit()
 
 print("테스트")
