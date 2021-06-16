@@ -42,7 +42,6 @@ my_formula 를 똑같이 사용하는데
 근데 아랫부분 표준화 파트 보면 in_sample, quality, type 다 날리고 전체 표준화 작업들어감
 그러고 나서 다시 선형 회귀분석 결과값 출력대는
 data=wine_standardized 값으로 함.
-그러면 위의 출력값이 같을수가 있나????? 이해를 할수가 없네
 
 
 
